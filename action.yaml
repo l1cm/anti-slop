@@ -1,10 +1,10 @@
-name: anti-slop
-description: A GitHub action that detects and automatically closes low-quality and AI slop PRs.
-author: peaklabs-dev
+name: anti-flop
+description: Detects and flags low-quality or AI-generated pull requests to help maintain repository quality.
+author: l1cm
 
 branding:
   icon: slash
-  color: orange
+  color: blue
 
 inputs:
   # Repo Auth Token
