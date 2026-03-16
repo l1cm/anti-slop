@@ -102,8 +102,9 @@ export function runDescriptionChecks(settings: Settings, context: Context): Chec
     }
 
     if (settings.blockedIssueNumbers.length > 0) {
-        const blockedNumbers = settings.blockedIssueNumbers.map((raw) => parseInt(raw));
-        const found = issueNumbers.filter((issueNumber) => blockedNumbers.includes(issueNumber));
+        const found = issueNumbers.filter((issueNumber) =>
+            settings.blockedIssueNumbers.includes(issueNumber),
+        );
         const passed = found.length === 0;
         recordCheck(results, {
             name: "blocked-issue-numbers",

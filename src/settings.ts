@@ -20,6 +20,26 @@ function parseList(raw: string): string[] {
         .filter(Boolean);
 }
 
+function parseIssueNumberList(raw: string): number[] {
+    return parseList(raw).map((value) => {
+        if (!/^\d+$/.test(value)) {
+            throw new Error(
+                `"blocked-issue-numbers" must contain only comma-separated positive integers, got "${value}"`,
+            );
+        }
+
+        const parsed = Number(value);
+
+        if (!Number.isSafeInteger(parsed) || parsed <= 0) {
+            throw new Error(
+                `"blocked-issue-numbers" must contain only comma-separated positive integers, got "${value}"`,
+            );
+        }
+
+        return parsed;
+    });
+}
+
 export function getSettings(): Settings {
     const settings = {
         // Repo Auth Token
@@ -48,7 +68,7 @@ export function getSettings(): Settings {
         maxCodeReferences: parseInt(core.getInput(Input.MaxCodeReferences)),
         requireLinkedIssue: core.getBooleanInput(Input.RequireLinkedIssue),
         blockedTerms: core.getMultilineInput(Input.BlockedTerms),
-        blockedIssueNumbers: parseList(core.getInput(Input.BlockedIssueNumbers)),
+        blockedIssueNumbers: parseIssueNumberList(core.getInput(Input.BlockedIssueNumbers)),
 
         // PR Template Checks
         requirePrTemplate: core.getBooleanInput(Input.RequirePrTemplate),

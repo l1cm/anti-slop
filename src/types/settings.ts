@@ -25,7 +25,7 @@ export interface Settings {
     maxCodeReferences: number;
     requireLinkedIssue: boolean;
     blockedTerms: string[];
-    blockedIssueNumbers: string[];
+    blockedIssueNumbers: number[];
 
     // PR Template Checks
     requirePrTemplate: boolean;
