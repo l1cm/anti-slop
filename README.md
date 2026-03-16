@@ -6,25 +6,25 @@
 
 
 
-# Anti Slop
+# Anti flop
 
-A GitHub Action that detects and automatically closes low-quality and AI slop PRs. It ships with **31 check rules** covering PR branches, title, description, template, commit messages, file changes, user signals and contributor history.
+A GitHub Action that detects and automatically closes low-quality and AI flop PRs. It ships with **31 check rules** covering PR branches, title, description, template, commit messages, file changes, user signals and contributor history.
 
 Everything is configurable through **54 options** including checks, exemptions and failure actions, that you do not have to touch if you don't want to, as we've set sensible defaults.
 
 > [!IMPORTANT]
-> Anti Slop is currently **v0** and subject to breaking changes prior to v1.0.0. Pin to a specific version or commit SHA if you need stability.
+> Anti flop is currently **v0** and subject to breaking changes prior to v1.0.0. Pin to a specific version or commit SHA if you need stability.
 
-## Why Anti Slop?
+## Why Anti flop?
 
-Open-source maintainers are drowning in low-quality and AI-generated slop PRs. These PRs undermine real contributions and waste reviewers time. Anti Slop stops these PRs before they reach your review queue.
+Open-source maintainers are drowning in low-quality and AI-generated flop PRs. These PRs undermine real contributions and waste reviewers time. Anti flop stops these PRs before they reach your review queue.
 
-- **Fast:** The entire action runs in under 15 seconds which means slop PRs are caught and closed before you even notice them.
-- **Keep open source open:** The beauty of open source is that anyone can contribute. Anti Slop blocks low-quality and AI-generated PRs without forcing you to restrict contributions to Members only - new contributors are not penalized just for being new.
+- **Fast:** The entire action runs in under 15 seconds which means flop PRs are caught and closed before you even notice them.
+- **Keep open source open:** The beauty of open source is that anyone can contribute. Anti flop blocks low-quality and AI-generated PRs without forcing you to restrict contributions to Members only - new contributors are not penalized just for being new.
 - **Language agnostic:** All checks are fully language agnostic and work with any programming language out of the box.
-- **Battle-tested rules:** All 31 checks are derived from patterns identified across 130+ manually reviewed AI slop PRs submitted to different large open-source projects.
-- **Thoughtful defaults:** Defaults are created and adjusted based on hands-on experience maintaining [Coolify](https://github.com/coollabsio/coolify) (50K+ stars, 120+ slop PRs per month).
-- **Anti-slop, not anti-AI:** Genuinely good AI-assisted contributions are not penalized.
+- **Battle-tested rules:** All 31 checks are derived from patterns identified across 130+ manually reviewed AI flop PRs submitted to different large open-source projects.
+- **Thoughtful defaults:** Defaults are created and adjusted based on hands-on experience maintaining [Coolify](https://github.com/coollabsio/coolify) (50K+ stars, 120+ flop PRs per month).
+- **Anti-flop, not anti-AI:** Genuinely good AI-assisted contributions are not penalized.
 - **Configurable sensitivity:** The [`max-failures`](#max-failures) threshold controls how many checks must fail before any actions are taken. The higher the number, the less likely a legitimate contributor is flagged.
 - **Zero-configuration exemptions:** Owners, Members and Collaborators are automatically exempt by default with zero configuration needed.
 - **No inline scripts:** No ugly, unmaintainable and unreadable inline GitHub Action scripts. Just clean, well-named configuration options that are easy to understand and maintain.
@@ -47,10 +47,10 @@ on:
     types: [opened, reopened]
 
 jobs:
-  anti-slop:
+  anti-flop:
     runs-on: ubuntu-latest
     steps:
-      - uses: peakoss/anti-slop@v0
+      - uses: peakoss/anti-flop@v0
         with:
           max-failures: 4
 ```
@@ -95,7 +95,7 @@ jobs:
   pr-quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: peakoss/anti-slop@v0
+      - uses: peakoss/anti-flop@v0
         with:
           # General Settings
           max-failures: 4
@@ -273,7 +273,7 @@ Default: `${{ github.token }}`
 
 The number of individual check failures required before failure actions (close, lock, comment, etc.) are triggered.
 
-This is the primary knob for controlling false positives. A higher value means more checks must fail before the PR is acted upon, making it less likely that a legitimate contribution is mistakenly closed. A lower value is more aggressive and catches slop easier but increases the risk of false positives.
+This is the primary knob for controlling false positives. A higher value means more checks must fail before the PR is acted upon, making it less likely that a legitimate contribution is mistakenly closed. A lower value is more aggressive and catches flop easier but increases the risk of false positives.
 
 - Set to `1` for zero tolerance -> any single check failure triggers actions.
 - Set to `4` (the default) for a balanced approach -> the PR must fail four separate checks before it is closed.
@@ -320,7 +320,7 @@ Default: `""` (all branches allowed)
 
 Newline-separated list of source branch patterns to block. Any PR originating from a branch that matches one of these patterns will fail the `blocked-source-branches` check.
 
-By default, PRs from `main` and `master` are blocked because slop PRs commonly push directly to the default branch and open a PR from there, rather than creating a feature branch. Also, using a default branch as a source branch can cause issues with workflows that are triggered by push events on forks.
+By default, PRs from `main` and `master` are blocked because flop PRs commonly push directly to the default branch and open a PR from there, rather than creating a feature branch. Also, using a default branch as a source branch can cause issues with workflows that are triggered by push events on forks.
 
 If the same branch pattern appears in both [`allowed-source-branches`](#allowed-source-branches) and `blocked-source-branches`, **the blocked list takes precedence** and the branch will always be blocked.
 
@@ -484,7 +484,7 @@ Dotfiles (e.g. `.gitignore`) and extensionless files (e.g. `Makefile`) are exemp
 
 If left empty (the default), all file extensions are allowed.
 
-This can be very useful to quickly filter out slop PRs to add python code to a PHP project for example.
+This can be very useful to quickly filter out flop PRs to add python code to a PHP project for example.
 
 Default: `""` (all extensions allowed)
 
@@ -502,7 +502,7 @@ Default: `""` (all paths allowed)
 
 Newline-separated list of file or folder paths to block for changed files. Entries ending with `/` match entire folders. If any changed file matches one of these entries, the `blocked-paths` check fails.
 
-The default blocks common repository metadata files that are frequent targets for slop PRs — trivial edits to README, LICENSE, SECURITY, or CODE_OF_CONDUCT files are a classic pattern.
+The default blocks common repository metadata files that are frequent targets for flop PRs — trivial edits to README, LICENSE, SECURITY, or CODE_OF_CONDUCT files are a classic pattern.
 
 If the same path appears in both [`allowed-paths`](#allowed-paths) and `blocked-paths`, **the blocked list takes precedence** and changes to that path will always be blocked.
 
@@ -782,4 +782,4 @@ To see the debug logging from this action, you must set the secret `ACTIONS_STEP
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=peakoss/anti-slop&type=date&legend=top-left)](https://www.star-history.com/#peakoss/anti-slop&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=peakoss/anti-flop&type=date&legend=top-left)](https://www.star-history.com/#peakoss/anti-flop&type=date&legend=top-left)
