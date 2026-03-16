@@ -1,3 +1,11 @@
+# This has edits and is not endoursed by anyone
+
+
+
+
+
+
+
 # Anti Slop
 
 A GitHub Action that detects and automatically closes low-quality and AI slop PRs. It ships with **31 check rules** covering PR branches, title, description, template, commit messages, file changes, user signals and contributor history.
